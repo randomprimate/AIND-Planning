@@ -137,10 +137,25 @@ Unload(C2, P2, SFO)
 
 ## Observations
 
-The initial problem is simple enough for most algorithms to have a good performance. The worst performer is `recursive_best_first_search h_1` at 1.6969 seconds and expanding 4229 nodes. Although the plan length is still good enough with 6 paths.  The increasing complexity has a positive correlation with the time it takes for each algorithm to find a solution.
+The initial problem is simple enough for most algorithms to have a good performance. The worst performer is 
+`recursive_best_first_search h_1` at 1.6969 seconds and expanding 4229 nodes. Although the plan length is still good 
+enough with 6 paths.  The increasing complexity has a positive correlation with the time it takes for each algorithm to 
+find a solution.
 
-Its also surprising to see how breadth first search takes longer than depth first search considering that  depth first search would expand much more nodes.  Also important to note that both have very bad performance making them timeout during the third problem or even the second one for breadth first search.
+Its also surprising to see how breadth first search takes longer than depth first search considering that  depth first 
+search would expand much more nodes.  Also important to note that both have very bad performance making them timeout 
+during the third problem or even the second one for breadth first search.
 
-Heuristics where not as useful as expected, the result where not the fastest ones but all of them did provide the minimum amount of steps. 
+Heuristics where not as useful as expected, the results where not the fastest ones but all of them did provide the minimum 
+amount of steps. 
 
 Overall the `depth_first_graph_search` would be my method of choice followed by `astar_search_h_ignore_preconditions`.
+
+## Comparisons with References
+
+Breadth first search is optimal and would always find the shortest path but might not always find the cheapest (less number of steps), for this we have Uniform Cost Search which we can see expands more nodes as its trying to find a more cost effective path. We can also appreciate how Depth First Graph Search is not optimal since there is more than one state  (AIND Lesson 7 on Search). 
+
+A* Search algorithm is not guaranteed to be optimal but when combined with `h_ignore_preconditions` and `h_pg_levelsum` heuristics optimal paths are achieved based on the newly applied constraints (AIND Lesson 4 Introduction).
+
+When comparing `astar_search h_pg_levelsum` with `astar_search h_ignore_preconditions` we can see how heavy calculating heuristics can be, in particular against `ignoring preconditions` which is frequently used in planning search (Artifical Intelligence: A Modern Approach, 3rd ed., Russell and Norvig, p. 376). While this is the case levelsum is also used in planning (Artificial Intelligence: A Modern Approach, 3rd ed., Russell and Norvig, p. 382) but it comes down to the use case considered given that from the Game Playing project in AIND we were able to appreciate how sometimes its best to choose the cheapest options over the smartest one.
+
